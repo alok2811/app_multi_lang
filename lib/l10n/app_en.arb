@@ -1,6 +1,5 @@
 {
   "hello": "Hello",
   "welcome": "Welcome to our app",
-  "name": "Alok Dubey",
-  "test": "Test"
+  "name": "{name}"
 }

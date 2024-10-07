@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
           supportedLocales: [
             Locale('en', ''), // English
             Locale('es', ''), // Spanish
+            Locale('ar', ''), // Arbic
           ],
           localizationsDelegates: [
             AppLocalizations.delegate, // Add this line
@@ -58,16 +59,33 @@ class MyHomePage extends StatelessWidget {
         title: Text(
             AppLocalizations.of(context)?.hello ?? ''), // No need for context
         actions: [
-          IconButton(
-              onPressed: () {
-                context.read<LocalizationService>().changeLanguage('en');
-              },
-              icon: Icon(Icons.language))
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              context.read<LocalizationService>().changeLanguage(value);
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  value: 'en',
+                  child: Text('English'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'es',
+                  child: Text('Spanish'),
+                ),
+                PopupMenuItem<String>(
+                  value: 'ar',
+                  child: Text('Arabic'),
+                ),
+              ];
+            },
+            icon: Icon(Icons.language),
+          ),
         ],
       ),
       body: Center(
         child: Text(
-            AppLocalizations.of(context)?.welcome ?? ''), // No need for context
+            "${AppLocalizations.of(context)?.welcome} - ${AppLocalizations.of(context)?.name("Rahul")}"), // No need for context
       ),
     );
   }
